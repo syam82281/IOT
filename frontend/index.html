@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verdant IoT · IoT Component Health</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%232f8f5b'/%3E%3Cpath d='M9 21c0-7 5-11 14-12 0 8-4 13-11 13-1 0-2 0-3-1z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="config.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <a class="brand" href="#overview" aria-label="Verdant IoT home">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2f8f5b"/><path d="M9 21c0-7 5-11 14-12 0 8-4 13-11 13-1 0-2 0-3-1z" fill="#fff"/><path d="M9 23c3-5 6-8 11-10" stroke="#2f8f5b" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+      <span>Verdant</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#devices-panel">IoT Components</a>
+      <a href="#incidents-panel">Failures</a>
+      <a href="#chat-panel">Ask AI</a>
+    </nav>
+    <div class="live" id="live" role="status"></div>
+  </aside>
+
+  <main class="main" id="overview">
+    <section class="hero" id="hero" aria-live="polite"></section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="panel" id="devices-panel">
+          <header class="panel-head"><h2>IoT Components</h2><span class="muted" id="devices-count"></span></header>
+          <div id="devices" class="device-list"></div>
+        </section>
+
+        <section class="panel" id="incidents-panel">
+          <header class="panel-head"><h2>What went wrong</h2><span class="muted" id="incidents-count"></span></header>
+          <div id="incidents"></div>
+        </section>
+      </div>
+
+      <div class="stack side">
+        <section class="panel" id="detail"></section>
+
+        <section class="panel chat" id="chat-panel" aria-label="Verdant AI chat">
+          <header class="panel-head">
+            <div>
+              <h2>Verdant AI</h2>
+              <p class="muted small">Ask why an IoT component failed, how it happened, and what to do.</p>
+            </div>
+          </header>
+          <div class="chat-scope" id="chat-scope"></div>
+          <div class="messages" id="messages" aria-live="polite"></div>
+          <div class="chips" id="chips"></div>
+          <form class="composer" id="composer" autocomplete="off">
+            <input id="chat-input" type="text" maxlength="500" placeholder="Why is my IoT component failing?" aria-label="Your question">
+            <button type="submit" id="send">Ask</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<div id="toasts" aria-live="assertive"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

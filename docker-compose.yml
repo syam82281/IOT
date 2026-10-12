@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    ports: ["8000:8000"]
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}      # optional: enables the Claude-powered chat
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-5-5}
+    volumes: ["./database:/srv/database"]            # SQLite file lives here
+
+  frontend:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: [backend]
+
+  simulator:                                          # remove this service when you connect real devices
+    build: ./simulator
+    environment: { API_URL: "http://backend:8000" }
+    depends_on: [backend]
