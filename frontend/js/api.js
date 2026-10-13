@@ -1,4 +1,4 @@
-const BASE = window.VERDANT_API || "http://localhost:8000/api";
+const BASE = window.VERDANT_API || "http://3.15.150.133:8000/api";
 
 async function req(path, options) {
   const res = await fetch(BASE + path, options);
