@@ -6,7 +6,7 @@ export function sparkline(values, status = "healthy") {
   const w = 96, h = 28, min = Math.min(...v), max = Math.max(...v), r = max - min || 1;
   const pts = v.map((x, i) => `${((i / (v.length - 1)) * w).toFixed(1)},${(h - 3 - ((x - min) / r) * (h - 6)).toFixed(1)}`);
   return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
-    <polyline points="${pts.join(" ")}" fill="none" stroke="${STATUS_COLOR[status]}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    <polyline points="${pts.join(" ")}" fill="none" stroke="${STATUS_COLOR[status]}" stroke-width="1.8" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
 export function lineChart(points, metric, status = "healthy") {
