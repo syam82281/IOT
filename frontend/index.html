@@ -14,55 +14,70 @@
 <body>
 <div class="shell">
   <aside class="rail">
-    <a class="brand" href="#overview" aria-label="Verdant IoT home">
+    <a class="brand" href="#/overview" aria-label="Verdant IoT home">
       <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#2f8f5b"/><path d="M9 21c0-7 5-11 14-12 0 8-4 13-11 13-1 0-2 0-3-1z" fill="#fff"/><path d="M9 23c3-5 6-8 11-10" stroke="#2f8f5b" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
       <span>Verdant</span>
     </a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#overview">Overview</a>
-      <a href="#devices-panel">IoT Components</a>
-      <a href="#incidents-panel">Failures</a>
-      <a href="#chat-panel">Ask AI</a>
+    <nav class="nav" aria-label="Pages">
+      <a href="#/overview" data-nav="overview">Overview</a>
+      <a href="#/components" data-nav="components">IoT Components</a>
+      <a href="#/failures" data-nav="failures">Failures <span class="count" id="nav-failures"></span></a>
+      <a href="#/ask" data-nav="ask">Ask AI</a>
     </nav>
     <div class="live" id="live" role="status"></div>
   </aside>
 
-  <main class="main" id="overview">
-    <section class="hero" id="hero" aria-live="polite"></section>
+  <main class="main">
+    <div class="banner" id="banner" hidden role="alert"></div>
 
-    <div class="layout">
-      <div class="stack">
-        <section class="panel" id="devices-panel">
-          <header class="panel-head"><h2>IoT Components</h2><span class="muted" id="devices-count"></span></header>
-          <div id="devices" class="device-list"></div>
-        </section>
+    <!-- Page 1: Overview -->
+    <section class="page" data-page="overview" hidden>
+      <div class="hero" id="hero" aria-live="polite"></div>
+      <header class="sec-head"><h2>Component types</h2><a class="more" href="#/components">Open IoT components</a></header>
+      <div class="type-grid" id="ov-types"></div>
+      <section class="panel" style="margin-top:28px">
+        <header class="panel-head"><h2>Needs attention</h2><a class="more" href="#/failures">All failures</a></header>
+        <div id="ov-incidents"></div>
+      </section>
+    </section>
 
-        <section class="panel" id="incidents-panel">
-          <header class="panel-head"><h2>What went wrong</h2><span class="muted" id="incidents-count"></span></header>
-          <div id="incidents"></div>
-        </section>
-      </div>
+    <!-- Page 2: IoT Components (type boxes) -->
+    <section class="page" data-page="components" hidden>
+      <header class="page-head"><h1>IoT Components</h1><p class="muted">Pick a type to see every component of that kind.</p></header>
+      <div class="type-grid" id="types"></div>
+    </section>
 
-      <div class="stack side">
-        <section class="panel" id="detail"></section>
+    <!-- Page 3: one type (component boxes) -->
+    <section class="page" data-page="category" hidden>
+      <div id="cat-head"></div>
+      <div class="comp-grid" id="cat-list"></div>
+    </section>
 
-        <section class="panel chat" id="chat-panel" aria-label="Verdant AI chat">
-          <header class="panel-head">
-            <div>
-              <h2>Verdant AI</h2>
-              <p class="muted small">Ask why an IoT component failed, how it happened, and what to do.</p>
-            </div>
-          </header>
-          <div class="chat-scope" id="chat-scope"></div>
-          <div class="messages" id="messages" aria-live="polite"></div>
-          <div class="chips" id="chips"></div>
-          <form class="composer" id="composer" autocomplete="off">
-            <input id="chat-input" type="text" maxlength="500" placeholder="Why is my IoT component failing?" aria-label="Your question">
-            <button type="submit" id="send">Ask</button>
-          </form>
-        </section>
-      </div>
-    </div>
+    <!-- Page 4: one component -->
+    <section class="page" data-page="component" hidden>
+      <div id="comp"></div>
+    </section>
+
+    <!-- Page 5: Failures -->
+    <section class="page" data-page="failures" hidden>
+      <header class="page-head"><h1>Failures</h1><p class="muted">Every problem the monitor found, newest first.</p></header>
+      <div class="filters" id="filters"></div>
+      <section class="panel"><div id="all-incidents"></div></section>
+    </section>
+
+    <!-- Page 6: Ask AI -->
+    <section class="page" data-page="ask" hidden>
+      <header class="page-head"><h1>Ask AI</h1><p class="muted">Ask why an IoT component failed, how it happened, and what to do.</p></header>
+      <section class="panel chat" id="chat-panel" aria-label="Verdant AI chat">
+        <div class="chat-scope" id="chat-scope"></div>
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+        <form class="composer" id="composer" autocomplete="off">
+          <input id="chat-input" type="text" maxlength="500" placeholder="Why is my IoT component failing?" aria-label="Your question">
+          <button type="submit" id="send">Ask</button>
+        </form>
+      </section>
+    </section>
   </main>
 </div>
 <div id="toasts" aria-live="assertive"></div>

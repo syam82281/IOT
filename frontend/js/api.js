@@ -9,7 +9,7 @@ async function req(path, options) {
 export const api = {
   summary: () => req("/summary"),
   devices: () => req("/devices"),
-  incidents: () => req("/incidents?limit=12"),
+  incidents: () => req("/incidents?limit=50"),
   telemetry: (id) => req(`/devices/${encodeURIComponent(id)}/telemetry?limit=60`),
   chat: (body) => req("/chat", {
     method: "POST",
